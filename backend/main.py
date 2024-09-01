@@ -7,7 +7,6 @@ import bard
 import requests
 
 app = FastAPI()
-# weather_api_key = "175f6953b7msheb39c323cd409ddp143c7fjsn214d36b6a1a3"
 
 # Add CORS middleware
 app.add_middleware(
