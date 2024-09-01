@@ -1,4 +1,4 @@
-#!/Users/shivkantchauhan/Desktop/Tour-Advisor/backend/env/bin/python3
+#!/Users/shivkantchauhan/Desktop/Tour-Advisor/backend/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -19,7 +19,7 @@ models = [m for m in palm.list_models() if 'generateText' in m.supported_generat
 model = models[0].name
 
 def generate_itinerary(source, destination, start_date, return_date, no_of_day, budget):
-    prompt = f"Generate a personalized trip itinerary for a {no_of_day}-day trip {source} to {destination} from {start_date} to {return_date}, with an optimum budget around {budget} (Currency:INR)."
+    prompt = f"Generate a personalized trip itinerary for a {no_of_day}-day trip {source} to {destination} from {start_date} to {return_date}, with a budget around {budget} (Currency:INR)."
     completion = palm.generate_text(
         model=model,
         prompt=prompt,
