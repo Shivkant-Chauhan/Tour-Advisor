@@ -1,0 +1,19 @@
+.navbar_top {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+    }
+
+    p {
+        font-style: italic;
+        font-family: 'Dancing Script', cursive;
+        font-size: large;
+    }
+}
