@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    command: npm start
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: backend
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --reload
