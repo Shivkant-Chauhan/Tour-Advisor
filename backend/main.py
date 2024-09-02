@@ -24,7 +24,10 @@ async def plan_journey(
     destination: str,
     start_date: str,
     return_date: str,
-    budget: Optional[str]
+    budget: str,
+    adults: str,
+    couples: str,
+    children: str,
 ):
 
     date_format = "%Y-%m-%d"
@@ -34,7 +37,9 @@ async def plan_journey(
 
     try:
         weather_data = bard.get_weather_data(destination, start_date, return_date)
-        planned_journey = bard.generate_itinerary(source, destination, start_date, return_date, number_of_days, budget)
+        planned_journey = bard.generate_itinerary(
+            source, destination, start_date, return_date, number_of_days, budget, adults, couples, children
+        )
         response = {
             "weather_data": weather_data,
             "planned_journey": planned_journey,

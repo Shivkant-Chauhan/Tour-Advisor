@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import DatePicker from 'react-datepicker';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -12,6 +12,9 @@ const Details = () => {
     const [source, setSource] = useState("");
     const [destination, setDestination] = useState("");
     const [budget, setBudget] = useState("");
+    const [adults, setAdults] = useState(1);
+    const [children, setChildren] = useState(0);
+    const [couples, setCouples] = useState(0);
     const [error, setError] = useState("");
     const backend_base_url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -63,7 +66,10 @@ const Details = () => {
             destination: destination,
             start_date: formattedStartDate,
             return_date: formattedReturnDate,
-            budget: budget
+            budget: budget,
+            adults: adults,
+            couples: couples,
+            children: children,
         });
 
         try {
@@ -169,6 +175,50 @@ const Details = () => {
                                 onChange={(e) => setBudget(e.target.value)}
                             />
                         </div>
+                        <span className="form-group">
+                            <div>
+                                <label htmlFor="date">No. of Adults:</label>
+                                <br />
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="destination"
+                                    id="destination"
+                                    placeholder="Number of Adults"
+                                    value={adults}
+                                    onChange={(e) => setAdults(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="date">No. of Couple pairs (for separate rooms):</label>
+                                <br />
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="destination"
+                                    id="destination"
+                                    placeholder="Number of Couples"
+                                    value={couples}
+                                    onChange={(e) => setCouples(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="date">No. of Children (below 15):</label>
+                                <br />
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="destination"
+                                    id="destination"
+                                    placeholder="Number of Children"
+                                    value={children}
+                                    onChange={(e) => setChildren(e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </span>
 
                         <button
                             type="submit"
