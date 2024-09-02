@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 import bard
 import requests
+import asyncio
 
 app = FastAPI()
 
@@ -17,6 +18,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+async def fetch_weather_data(destination: str, start_date: str, return_date: str):
+    return bard.get_weather_data(destination, start_date, return_date)
+
+async def generate_itinerary(source: str, destination: str, start_date: str, return_date: str, 
+                             number_of_days: int, budget: str, adults: str, 
+                             couples: str, children: str, stops: str):
+    return bard.generate_itinerary(
+        source, destination, start_date, return_date, number_of_days, budget, adults, couples, children, stops
+    )
 
 @app.post("/plan-journey")
 async def plan_journey(
@@ -28,6 +38,7 @@ async def plan_journey(
     adults: str,
     couples: str,
     children: str,
+    stops: str,
 ):
 
     date_format = "%Y-%m-%d"
@@ -36,10 +47,12 @@ async def plan_journey(
     number_of_days = (end_date - start_date).days
 
     try:
-        weather_data = bard.get_weather_data(destination, start_date, return_date)
-        planned_journey = bard.generate_itinerary(
-            source, destination, start_date, return_date, number_of_days, budget, adults, couples, children
+        weather_data_task = fetch_weather_data(destination, start_date, return_date)
+        planned_journey_task = generate_itinerary(
+            source, destination, start_date, return_date, number_of_days, budget, adults, couples, children, stops
         )
+        weather_data, planned_journey = await asyncio.gather(weather_data_task, planned_journey_task)
+        
         response = {
             "weather_data": weather_data,
             "planned_journey": planned_journey,

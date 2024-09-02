@@ -12,7 +12,7 @@ colorama==0.4.6
 Flask==3.0.3
 flask-sitemapper
 Flask-SQLAlchemy==3.1.1
-# google-ai-generativelanguage==0.3.3
+google-ai-generativelanguage
 google-api-core==2.12.0
 google-auth==2.23.4
 google-generativeai

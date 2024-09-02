@@ -15,11 +15,13 @@ open_weather_api = os.environ.get("OPEN_WEATHER_API")
 
 # Configuring PALM
 palm.configure(api_key=palm_api_key)
-models = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
-model = models[0].name
+# models = [m for m in palm.list_models() if 'generateText' in m.supported_generation_methods]
+# model = models[0].name
+model = 'models/text-bison-001'
 
-def generate_itinerary(source, destination, start_date, return_date, no_of_day, budget, adults, couples, children):
-    prompt = f"Generate a personalized trip itinerary for a {no_of_day}-day trip {source} to {destination} from {start_date} to {return_date}, with a budget around {budget} (Currency:INR). There are {adults} adults and {children} children on the trip, also {couples} couple pairs to provide separate rooms."
+def generate_itinerary(source, destination, start_date, return_date, no_of_day, budget, adults, couples, children, stops):
+    # prompt = f"Generate a personalized trip itinerary for a {no_of_day}-day trip from {source} to {destination}, from {start_date} to {return_date}, with a budget around {budget} (Currency:INR). From start {source} to end {destination}, we need to go via {stops}. There are {adults} adults and {children} children on the trip, also {couples} couple pairs to provide separate rooms."
+    prompt = f"Create a customized itinerary for a {no_of_day}-day journey from {source} to {destination}, spanning from {start_date} to {return_date}, with an approximate budget of {budget} INR. The trip will include stops at {stops} along the way. The group consists of {adults} adults, {children} children, and {couples} couple pairs, who will require separate rooms."
     completion = palm.generate_text(
         model=model,
         prompt=prompt,

@@ -15,6 +15,7 @@ const Details = () => {
     const [adults, setAdults] = useState(1);
     const [children, setChildren] = useState(0);
     const [couples, setCouples] = useState(0);
+    const [stops, setStops] = useState("");
     const [error, setError] = useState("");
     const backend_base_url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -70,6 +71,7 @@ const Details = () => {
             adults: adults,
             couples: couples,
             children: children,
+            stops: stops,
         });
 
         try {
@@ -128,6 +130,19 @@ const Details = () => {
                                 placeholder="Enter your destination"
                                 value={destination}
                                 onChange={(e) => setDestination(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="destination">In-between stops (if any):</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="destination"
+                                id="destination"
+                                placeholder="Provide in-between stops during the trip, if any"
+                                value={stops}
+                                onChange={(e) => setStops(e.target.value)}
                                 required
                             />
                         </div>
